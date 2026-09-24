@@ -1,0 +1,49 @@
+{
+  "case": "manual_amy",
+  "round": 1,
+  "last_fsopt_generation_ingested": 1,
+  "history_csv": "/Users/tikka/Documents/03_code/MATH+/03_manual_tandem_test/amy/history.csv",
+  "n_total_designs": 884,
+  "n_dim": 18,
+  "regime": "small_n",
+  "promoted_surrogate_dir": "/Users/tikka/Documents/03_code/MATH+/03_manual_tandem_test/amy/promoted/round_0001",
+  "last_promoted_round": 1,
+  "round_history": [
+    {
+      "case": "manual_amy",
+      "round": 1,
+      "n_total": 884,
+      "n_new": 884,
+      "regime": "small_n",
+      "split_kind": "pseudo_kfold",
+      "objectives": {
+        "FORCES": {
+          "r2_test": 0.9836692586518246,
+          "rmse_test": 0.07002867295261841,
+          "n_train": 707,
+          "n_test": 177,
+          "cv_gap_ratio": null,
+          "coverage_1sigma": 0.9887005649717514,
+          "coverage_2sigma": 1.0,
+          "max_z": 1.0352761552297256
+        },
+        "WAVEHEIGHTS": {
+          "r2_test": 0.9745359314251325,
+          "rmse_test": 0.11278864210148118,
+          "n_train": 707,
+          "n_test": 177,
+          "cv_gap_ratio": null,
+          "coverage_1sigma": 0.943502824858757,
+          "coverage_2sigma": 0.9943502824858758,
+          "max_z": 2.1308479892294803
+        }
+      },
+      "ok": true,
+      "threshold_regime": "small_n_relaxed",
+      "candidates_csv": "/Users/tikka/Documents/03_code/MATH+/03_manual_tandem_test/amy/round_0001/candidates.csv",
+      "n_candidates": 1,
+      "n_trusted": 0,
+      "n_proposed": 0
+    }
+  ]
+}
