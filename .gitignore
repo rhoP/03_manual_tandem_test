@@ -6,5 +6,5 @@ dkl_mobo/__pycache__/
 
 empirical_error_analysis/
 
-
+*.fso
 objective_study/

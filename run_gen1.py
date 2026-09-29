@@ -19,21 +19,29 @@ GP = HERE.parent / "01_GP"
 sys.path.insert(0, str(GP))
 
 import pandas as pd
-from dkl_mobo import config as dkl_config
+from dkl_mobo import config as dkl_config, data
 from fsopt_tandem import config as tconfig, ingest, round as tround
 from fsopt_tandem import state as tstate
 
 GEN1_BATCHES = {"amy": ["NSGA1_000"], "vera": ["NSGA1_000"],
-                "tiger": ["SobolVicinity_000", "NSGA1_000"]}
+                "tiger": ["SobolVicinity_000", "NSGA1_000"],
+                "hapaglloyd": ["NSGA1_000"]}   # NSGA2_000 is the later real round
 BATCH_SIZE = 20
 
 
 def make_gen1(case, extra_cols=()):
     dkl_config.use_case(case)
     cfg = dkl_config.CASES[case]
-    df = pd.read_csv(cfg["csv"])
+    # read_db() (not a raw pd.read_csv) so exclude_design_ids AND
+    # drop_solver_invalid are applied the same way production training does --
+    # a raw read here silently let known-bad sentinel rows (e.g. hapaglloyd's
+    # constant FORCES=-58.514972 placeholder on FSFlowValid=0 rows, same
+    # pattern as manasa) into "generation 1", corrupting the surrogate
+    # (R^2=-0.99) before this was caught; see
+    # notes/hull_opt_guarantees_audit.md's gate-calibration section.
+    df = data.read_db()
     batch = df["Design ID"].str.rsplit("/", n=1).str[0].str.split("/").str[-1]
-    m = batch.isin(GEN1_BATCHES[case]) & ~df["Design ID"].isin(cfg.get("exclude_design_ids", []))
+    m = batch.isin(GEN1_BATCHES[case])
     g = df[m]
     cols = ([c for c in g.columns if c.startswith("_")] + list(cfg["obj_cols"]) + list(extra_cols)
             + [c for c in cfg["con_cols"] if c in g.columns])

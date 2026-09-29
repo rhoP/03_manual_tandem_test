@@ -41,9 +41,9 @@
       "ok": true,
       "threshold_regime": "small_n_relaxed",
       "candidates_csv": "/Users/tikka/Documents/03_code/MATH+/03_manual_tandem_test/vera/round_0001/candidates.csv",
-      "n_candidates": 1,
-      "n_trusted": 1,
-      "n_proposed": 1
+      "n_candidates": 20,
+      "n_trusted": 4,
+      "n_proposed": 4
     }
   ]
 }
